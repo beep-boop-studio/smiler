@@ -1,14 +1,14 @@
-<<<<<<< HEAD
 from discord import Embed, Intents
-=======
+
 from os import name
 from discord import Intents
->>>>>>> d74b81a4c589dcdb65ee211ca020621bfdcaf5f2
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from discord import Embed
 from discord.ext.commands import Bot as BotBase
-from discord import utils
+from discord.ext.commands import CommandNotFound
 from datetime import datetime
+
+from ..db import db
 
 PREFIX = "s/"
 OWNER_IDS = [274948587295735809, 549213551236087808, 602779813089902600]
@@ -19,6 +19,8 @@ class Bot(BotBase):
         self.ready = False
         self.guild = None
         self.scheduler = AsyncIOScheduler()
+
+        db.autosave(self.scheduler)
 
         super().__init__(
             command_prefix=PREFIX, 
@@ -41,6 +43,19 @@ class Bot(BotBase):
     async def on_disconnect(self):
         print("Bot Disconnected.")
 
+    async def on_error(self, err, *args, **kwargs):
+        if err == "on_command_error":
+            await args[0].send("Unfortunately, something went wrong!")
+
+        raise
+
+    async def on_command_error(self, ctx, exc):
+        if isinstance(exc, CommandNotFound):
+            await ctx.send("CommandNotFound: That command could not be found! Please try again!")
+
+        else:
+            raise exc.original
+
     async def on_ready(self):
         if not self.ready:
             self.ready = True
@@ -48,9 +63,6 @@ class Bot(BotBase):
 
         else:
             print("Bot Reconnected.")
-
-    async def on_message(self, message):
-        pass
 
     async def on_guild_join(self, guild):
         print("Joined Server with ID: " + str(guild.id))

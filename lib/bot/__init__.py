@@ -1,9 +1,11 @@
-from discord import Intents
+from discord import Embed, Intents
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from discord.ext.commands import Bot as BotBase
+from discord import utils
+from datetime import datetime
 
-PREFIX = "::"
-OWNER_IDS = [549213551236087808]
+PREFIX = "s/"
+OWNER_IDS = [274948587295735809, 549213551236087808, 602779813089902600]
 
 class Bot(BotBase):
     def __init__(self):
@@ -38,12 +40,32 @@ class Bot(BotBase):
             self.ready = True
             print("Bot Ready.")
 
+            
+
         else:
             print("Bot Reconnected.")
 
 
     async def on_message(self, message):
         pass
+
+    async def on_guild_join(self, guild):
+        print("Joined Server with ID: " + str(guild.id))
+        channel = guild.system_channel
+
+        embed = Embed(title="The ultimate all-purpose Discord Bot", description="Make your server a better place!", timestamp=datetime.now())
+        fields = [("What Can I Do?", "-Auto Moderation\n-Polls\n-POKEMON, gotta catch em all!", True),
+                  ("What Can't I Do?", "-Your mama\n-The 100m meter sprint\n-Get you to stop watching anime", True),
+                  ("Contribute to me!", "1. Post issues and pull requests at **https://www.github.com/beep-boop-studio/smiler/**\n2. Support my developers at **https://www.patreon.com/beepboopstudio**\n2. Join the team at **https://www.studiobeepboop.com/**", False)
+                  ]
+
+        for name, value, inline in fields:
+            embed.add_field(name=name, value=value, inline=inline)
+
+        embed.set_author(name="Welcome to Smiler v" + self.VERSION, icon_url=self.user.avatar_url)
+        embed.set_footer(text="Copyright © Beep Boop Studio Ltd 2020. All Rights Reserved.")
+
+        await channel.send(embed=embed)
 
 bot = Bot()
          

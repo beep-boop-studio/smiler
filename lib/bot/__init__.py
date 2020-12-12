@@ -1,6 +1,7 @@
 from discord import Embed, Intents
 
 from os import name
+from glob import glob
 from discord import Intents
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from discord import Embed
@@ -12,6 +13,7 @@ from ..db import db
 
 PREFIX = "s/"
 OWNER_IDS = [274948587295735809, 549213551236087808, 602779813089902600]
+COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")]
 
 class Bot(BotBase):
     def __init__(self):
@@ -28,8 +30,18 @@ class Bot(BotBase):
             intents=Intents.all()
             )
 
+    def setup(self):
+        for cog in COGS:
+            self.load_extension(f"lib.cogs.{cog}")
+            print(f"{cog} cog loaded.")
+
+        print("Setup Complete!")
+
     def run(self, version):
         self.VERSION = version
+
+        print("Running Setup...")
+        self.setup()
 
         with open("./lib/bot/token.0", "r", encoding="utf-8") as tf:
             self.TOKEN = tf.read()

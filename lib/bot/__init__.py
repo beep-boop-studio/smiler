@@ -46,13 +46,6 @@ class Bot(BotBase):
             self.ready = True
             print("Bot Ready.")
 
-<<<<<<< HEAD
-            
-=======
-            channel = self.get_channel(787276703734300672)
-            await channel.send("Bot Online.")
->>>>>>> d74b81a4c589dcdb65ee211ca020621bfdcaf5f2
-
         else:
             print("Bot Reconnected.")
 

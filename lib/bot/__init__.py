@@ -1,5 +1,7 @@
+from os import name
 from discord import Intents
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from discord import Embed
 from discord.ext.commands import Bot as BotBase
 
 PREFIX = "::"
@@ -38,9 +40,11 @@ class Bot(BotBase):
             self.ready = True
             print("Bot Ready.")
 
+            channel = self.get_channel(787276703734300672)
+            await channel.send("Bot Online.")
+
         else:
             print("Bot Reconnected.")
-
 
     async def on_message(self, message):
         pass

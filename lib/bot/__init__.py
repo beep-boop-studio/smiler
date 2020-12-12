@@ -11,7 +11,7 @@ from datetime import datetime
 
 from ..db import db
 
-PREFIX = "s/"
+PREFIX = "::"
 OWNER_IDS = [274948587295735809, 549213551236087808, 602779813089902600]
 COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")]
 
@@ -81,9 +81,9 @@ class Bot(BotBase):
         channel = guild.system_channel
 
         embed = Embed(title="The ultimate all-purpose Discord Bot", description="Make your server a better place!", timestamp=datetime.now())
-        fields = [("What Can I Do?", "-Auto Moderation\n-Polls\n-POKEMON, gotta catch em all!", True),
-                  ("What Can't I Do?", "-Your mama\n-The 100m meter sprint\n-Get you to stop watching anime", True),
-                  ("Contribute to me!", "1. Post issues and pull requests at **https://www.github.com/beep-boop-studio/smiler/**\n2. Support my developers at **https://www.patreon.com/beepboopstudio**\n2. Join the team at **https://www.studiobeepboop.com/**", False)
+        fields = [("What Can I Do?", "-Auto Moderation\n-Polls\n-Automatic Roles", True),
+                  ("What Can't I Do?", "-Play Music\n-Stream Anime\n-Steal Personal Data", True),
+                  ("Contribute to me!", "1. Post issues and pull requests at **https://www.github.com/beep-boop-studio/smiler/**\n2. Support my creators at **https://www.patreon.com/beepboopstudio**\n2. Join the team at **https://www.studiobeepboop.com/**", False)
                   ]
 
         for name, value, inline in fields:

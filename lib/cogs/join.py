@@ -13,7 +13,6 @@ class Join(Cog):
 
 	@command(name="info", aliases=["information", "status", "update"])
 	async def info(self, ctx):
-		channel = ctx.guild.system_channel
 
 		embed = Embed(title="The ultimate all-purpose Discord Bot", description="Make your server a better place!", timestamp=datetime.now())
 		fields = [("What Can I Do?", "-Auto Moderation\n-Polls\n-POKEMON, gotta catch em all!", True),
@@ -27,10 +26,11 @@ class Join(Cog):
 		embed.set_author(name="Welcome to Smiler v" + self.bot.VERSION, icon_url=self.bot.user.avatar_url)
 		embed.set_footer(text="Copyright © Beep Boop Studio Ltd 2020. All Rights Reserved.")
 
-		await channel.send(embed=embed)
+		await ctx.send(embed=embed)
 
 	@Cog.listener()
 	async def on_guild_join(self, guild):
+		print("Joined server with ID: " + str(guild.id))
 		channel = guild.system_channel
 
 		embed = Embed(title="The ultimate all-purpose Discord Bot", description="Make your server a better place!", timestamp=datetime.now())

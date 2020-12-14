@@ -46,5 +46,18 @@ class Join(Cog):
 
 		await channel.send(embed=embed)
 
+	@Cog.listener()
+	async def on_member_join(self, member):
+		print("Member with ID: " + str(member.id) + " joined Server with ID: " + str(member.guild.id))
+		channel = member.guild.system_channel
+
+		embed = Embed(title="@" + member.name + " joined this server", timestamp=datetime.now(), colour=0x00FF00)
+		embed.add_field(name="Member Number", value="They are member #" + str(member.guild.member_count) + "!", inline=False)
+		embed.set_author(name=member.name + "#" + member.discriminator, icon_url=member.avatar_url)
+		embed.set_thumbnail(url=member.avatar_url)
+		embed.set_footer(text="ID: " + str(member.id))
+
+		await channel.send(embed=embed)
+
 def setup(bot): 
 	bot.add_cog(Join(bot))

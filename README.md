@@ -6,10 +6,10 @@
 </p>
 
 ## Advanced, Fun, Colourful Discord Bot  
-**<a href="https://www.studiobeepboop.com/smiler">Smiler Bot</a> is a feature-loaded, all-purpose Discord Bot to manage and spice up your Discord Server.**  
-It provides many different features, such as auto-moderation and Pokemon, so that you don't have to worry about manual controlling your server or add more than one bot. You can even create your own commands with its 'Custom Command' feature to create even more custom events and processes.  
+**<a href="https://www.studiobeepboop.com/smiler">Smiler Bot</a> is a free, open-source, feature-packed Discord Bot created to manage and spice up your Discord Server.**  
+It provides many different features, such as auto-moderation and smart warnings systems so that you don't have to worry about manual controlling your server or add more than one bot. You can even create your own commands with its 'Custom Command' feature to create even more custom events and processes.  
 
-## Free And Easy To Contribute To
+## Free, Open-source and Easy To Contribute to
 Smiler will remain a free product and you can contribute to it. You can help improve this incredible Discord Bot by:  
 
 1. Posting issues about bugs and requests  
@@ -26,7 +26,8 @@ If you wish to make a spoof of the bot (please either credit us or make signific
 
 1. Clone this repo.
 2. Provide a token.0 file in the library/bot direcotry, that contains your bot's token
-3. Run the launcher.py file
+3. (Optional) Add any extra features to the bot.
+4. Run the launcher.py file
 
 ## Want to know more?  
 CHeck out our website: **https://www.studiobeepboop.com/**  

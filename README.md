@@ -31,7 +31,7 @@ If you wish to make a spoof of the bot (please either credit us or make signific
 4. Run the launcher.py file
 
 ## Want to know more?  
-CHeck out our website: **https://www.studiobeepboop.com/**  
+Check out our website: **https://www.studiobeepboop.com/**  
 Subscribe to our YouTube channel: **https://www.youtube.com/channel/UCwz5czpU4XUhSk-v3WF8vig**  
 Follow us on Twitter: **https://www.twitter.com/beep_studios**  
 Join our support server: **https://discord.gg/e2ahGVnNzS**  

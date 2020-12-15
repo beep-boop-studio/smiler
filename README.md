@@ -5,7 +5,7 @@
   </a>
 </p>
 
-## Fun, Colourful Discord Bot  
+## Fun, Feature-Packed Discord Bot  
 **<a href="https://www.studiobeepboop.com/smiler">Smiler Bot</a> is a free, open-source, feature-packed Discord Bot created to manage and spice up your Discord Server.**  
 It provides many different features, such as auto-moderation and smart warnings systems so that you don't have to worry about manual controlling your server or add more than one bot. You can even create your own commands with its 'Custom Command' feature to create even more custom events and processes.  
 

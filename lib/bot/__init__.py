@@ -11,7 +11,7 @@ from datetime import datetime
 
 from ..db import db
 
-PREFIX = "sp/"
+PREFIX = "s/"
 OWNER_IDS = [274948587295735809, 549213551236087808, 602779813089902600]
 COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")]
 

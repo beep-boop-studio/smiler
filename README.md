@@ -16,7 +16,8 @@ Smiler will remain a free product and you can contribute to it. You can help imp
 2. Support us on Patreon at  **https://www.patreon.com/beepboopstudio/**  
 3. Join the development team at **https://www.studiobeepboop.com/contact/**  
 
-Whatever option you choose, you have our utmost gratitude. Here's to greater projects and higher hopes!
+Whatever option you choose, you have our utmost gratitude. Here's to greater projects and higher hopes!  
+**NOTE: Please comply with the requirements listed in the LICENSE file.**
 
 ## Getting the Bot  
 ### Head to our website  

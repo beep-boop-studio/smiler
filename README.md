@@ -1,7 +1,7 @@
 # Smiler Bot  
 <p align="center">
   <a href="https://www.studiobeepboop.com/smiler/">
-    <img src="SmilerColoured.png" alt="Smiler Logo">
+    <img src="SmilerSilver.png" alt="Smiler Logo">
   </a>
 </p>
 

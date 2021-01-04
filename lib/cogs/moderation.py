@@ -30,12 +30,14 @@ class Moderation(Cog):
         await ctx.send(f"{ctx.author.mention} slapped {member.mention} {reason}! {random.choice(first)} {random.choice(second)}")
 
     @command(name="maketextchannel", aliases=["mktc"], brief="Creates a text channel.")
+    @command.has_permissions(manage_channels=True)
     async def create_channel(self, ctx, ch_name):
         '''Creates a text channel.'''
         await ctx.guild.create_text_channel(ch_name)
         await ctx.send(f"#{ch_name} was successfully created, {ctx.message.author.mention}!")
 
     @command(name="deltextchannel", aliases=["dtc"], brief="Deletes a text channel.")
+    @commands.has_permissions(manage_channels=True)
     async def delete_channel(self, ctx, ch_name):
         '''Deletes a text channel.'''
         channel = discord.utils.get(ctx.guild.channels, name=ch_name)
@@ -65,6 +67,7 @@ class Moderation(Cog):
             await ctx.send(f"I successfully deleted `{len(deleted):,}` messages!", delete_after=10)
     
     @command(name="giveguilds", aliases=["gg"], brief="Displays bot guilds.")
+    @commands.has_permissions(manage_guild=True)
     async def give_guilds(self, ctx):
         '''Displays bot guilds.'''
         async for guild in self.bot.fetch_guilds(limit=150):
@@ -81,7 +84,7 @@ class Moderation(Cog):
         embed.add_field(name="Reason:", value=f"{reason}", inline=False)
         embed.add_field(name="Peformed By:", value=f"{ctx.message.author.mention}")
         embed.set_thumbnail(url=member.avatar_url)
-        embed.set_author(name="Smiler", icon_url=self.bot.user.avatar_url)
+        embed.set_author(name="Smiler Pro", icon_url=self.bot.user.avatar_url)
         await ctx.send(embed=embed)
 
     @command(name="ban", brief="Bans a member.")
@@ -94,12 +97,32 @@ class Moderation(Cog):
                       colour=self.primary_colour)
         embed.add_field(name="Reason:", value=f"{reason}", inline=False)
         embed.add_field(name="Peformed By:", value=f"{ctx.message.author.mention}")
-        embed.add_field(name="Unban ID:", value=f"{member.mention}")
+        embed.add_field(name="Unban ID:", value=f"{member}")
         embed.set_thumbnail(url=member.avatar_url)
-        embed.set_author(name="Smiler", icon_url=self.bot.user.avatar_url)
+        embed.set_author(name="Smiler Pro", icon_url=self.bot.user.avatar_url)
         await ctx.send(embed=embed)
 
+    @command(name="unban")
+    @commands.has_permissions(ban_members=True)
+    async def unban_member(self, ctx, *, member):
+        banned_users = await ctx.guild.bans()
+        member_name, member_discriminator = member.split("#")
+
+        for ban_entry in banned_users:
+            user = ban_entry.user
+
+            if (user.name, user.discriminator) == (member_name, member_discriminator):
+                await ctx.guild.unban(user)
+                embed = Embed(title="Member Unbanned",
+                              description=f"{user.name} has been unbanned.",
+                              colour=self.primary_colour)
+                embed.add_field(name="Peformed By:", value=f"{ctx.message.author.mention}")
+                embed.set_thumbnail(url=user.avatar_url)
+                embed.set_author(name="Smiler Pro", icon_url=self.bot.user.avatar_url)
+                await ctx.send(embed=embed)
+
     @command(name="warn", brief="Gives a warning to a member.")
+    @commands.has_permissions(kick_members=True, manage_nicknames=True)
     async def warn_member(self, ctx, member : discord.Member, *, warning):
         '''Gives a warning to a member.'''
         await ctx.message.delete()
@@ -136,12 +159,25 @@ class Moderation(Cog):
         if member.guild_permissions.kick_members:
             embed = Embed(title=f"Modmail from {ctx.message.author.display_name}!",
                           description=f"{message}",
-                          colour=self.primary_colour)
+                          colour=self.primary_colour,
+                          datetime=datetime.utcnow())
             await member.send(embed=embed)
             await ctx.send(f"{ctx.message.author.mention}, your message has successfully been relayed to {member.mention}!", delete_after=15)
 
         else:
             await ctx.send(f"The person you mentioned cannot recieve modmail, {ctx.message.author.mention}!")
+
+    @command(name="replymodmail", aliases=["rplmm"], brief="Reply to modmail.")
+    @commands.has_permissions(kick_members=True, manage_nicknames=True, manage_messages=True)
+    async def reply_to_modmail(self, ctx, member : discord.Member, *, message):
+        '''Reply to modmail'''
+        await ctx.message.delete()
+        embed = Embed(title=f"Reply from {ctx.message.author.display_name}.",
+                      description=f"{message}",
+                      colour=self.primary_colour,
+                      datetime=datetime.utcnow())
+        await member.send(embed=embed)
+        await ctx.send(f"{ctx.message.author.mention}, your reply has successfully been relayed to {member.mention}!", delete_after=15)
 
     @Cog.listener()
     async def on_message(self, message):

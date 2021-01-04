@@ -1,0 +1,4 @@
+git+https://www.github.com/Rapptz/discord-ext-menus
+apscheduler
+discord.py
+aiosqlite

@@ -85,7 +85,7 @@ class Fun(Cog):
             f"{member.mention} tried to outrun a train, the train won.",
             f"{member.mention} killed themselves after seeing the normie memes that {ctx.message.author.mention} posts.",
             f"{member.mention} talked back to mods and got destroyed by the ban hammer.",
-            f"{member.mention} died after trying to out-meme Smiler Pro.",
+            f"{member.mention} died after trying to out-meme Smiler.",
             f"{member.mention} died from eating too much bread :/",
             f"{member.mention} died an honorable death. Death by snoo snoo.",
             f"{member.mention} tried to get famous on YouTube by live-streaming something dumb. Skydiving while chained to a fridge.",

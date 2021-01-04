@@ -30,7 +30,7 @@ class HelpMenu(ListPageSource):
         len_data = len(self.entries)
 
         embed = Embed(title="Help",
-                      description="Welcome to Smiler Pro help!",
+                      description="Welcome to Smiler's help dialog!",
                       colour=self.primary_colour)
         embed.set_thumbnail(url=self.ctx.guild.me.avatar_url)
         embed.set_footer(text=f"{offset:,} - {min(len_data, offset+self.per_page-1):,} of {len_data:,} commands.")
@@ -79,9 +79,9 @@ class Help(Cog):
             else:
                 await ctx.send("That command could not be found! Please check if the command you are looking for is valid, and try again.")
 
-    @command(name="info", aliases=["information"], brief="Gives information about Smiler Pro.")
+    @command(name="info", aliases=["information"], brief="Gives information about Smiler.")
     async def information(self, ctx):
-        '''Gives information about Smiler Pro.'''
+        '''Gives information about Smiler.'''
         await ctx.message.delete()
         embed = Embed(title="The ultimate all-purpose Discord bot.", description="Make your server a better place!", 
                         colour=self.primary_colour)
@@ -92,7 +92,7 @@ class Help(Cog):
         for name, value, inline in fields:
             embed.add_field(name=name, value=value, inline=inline)
         embed.set_footer(text="Copyright© 2020 Beep Boop Studio. All Rights Reserved.")
-        embed.set_author(name="Smiler Pro", icon_url=self.bot.user.avatar_url)
+        embed.set_author(name="Smiler", icon_url=self.bot.user.avatar_url)
         await ctx.send(embed=embed)
 
     @command(name="ping", brief="Shows bot ping.")
@@ -106,7 +106,7 @@ class Help(Cog):
         embed = Embed(title="Hmmm? Another supporter? Very well, may the ritual commence!",
                       description="Support Beep Boop Studios At `https://www.patreon.com/beepboopstudio`!",
                       colour=self.primary_colour)
-        embed.set_author(name="Smiler Pro", icon_url=self.bot.user.avatar_url)
+        embed.set_author(name="Smiler", icon_url=self.bot.user.avatar_url)
         embed.set_footer(text="Copyright © 2020 Beep Boop Studio. All Rights Reserved.")
         await ctx.send(embed=embed)
 
@@ -117,17 +117,17 @@ class Help(Cog):
             invite = await ctx.channel.create_invite()
             await ctx.send(f"Invite Created: {invite}")
         if item == "bot":
-            embed = Embed(title="Invite For Smiler Pro",
+            embed = Embed(title="Invite For Smiler",
                                     description="https://discord.com/oauth2/authorize?client_id=786922640848977921&permissions=8&redirect_uri=https%3A%2F%2Fstudiobeepboop.com&scope=bot",
                                     colour=self.primary_colour)
-            embed.set_author(name="Smiler Pro", icon_url=self.bot.user.avatar_url)
+            embed.set_author(name="Smiler", icon_url=self.bot.user.avatar_url)
             embed.set_footer(text="Copyright© 2020 Beep Boop Studio. All Rights Reserved.")
             await ctx.send(embed=embed)
         if item == "supportserver":
             embed = Embed(title="Invite To Beep Boop Studio's Server",
                                     description="https://discord.gg/DEwA8pdQnX",
                                     colour=self.primary_colour)
-            embed.set_author(name="Smiler Pro", icon_url=self.bot.user.avatar_url)
+            embed.set_author(name="Smiler", icon_url=self.bot.user.avatar_url)
             embed.set_footer(text="Copyright © 2020 Beep Boop Studio. All Rights Reserved.")
             await ctx.send(embed=embed)
 
@@ -139,7 +139,7 @@ class Help(Cog):
                       colour=self.primary_colour)
         embed.add_field(name="Watching:", value=f"{len(self.bot.guilds)} Servers", inline=False)
         embed.add_field(name="Ping:", value=f"{round(self.bot.latency * 1000)}ms", inline=False)
-        embed.set_author(name="Smiler Pro", icon_url=self.bot.user.avatar_url)
+        embed.set_author(name="Smiler", icon_url=self.bot.user.avatar_url)
         embed.set_thumbnail(url=self.bot.user.avatar_url)
         await ctx.send(embed=embed)
 

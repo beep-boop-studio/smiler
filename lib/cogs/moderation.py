@@ -81,7 +81,7 @@ class Moderation(Cog):
         embed.add_field(name="Reason:", value=f"{reason}", inline=False)
         embed.add_field(name="Peformed By:", value=f"{ctx.message.author.mention}")
         embed.set_thumbnail(url=member.avatar_url)
-        embed.set_author(name="Smiler Pro", icon_url=self.bot.user.avatar_url)
+        embed.set_author(name="Smiler", icon_url=self.bot.user.avatar_url)
         await ctx.send(embed=embed)
 
     @command(name="ban", brief="Bans a member.")
@@ -96,7 +96,7 @@ class Moderation(Cog):
         embed.add_field(name="Peformed By:", value=f"{ctx.message.author.mention}")
         embed.add_field(name="Unban ID:", value=f"{member.mention}")
         embed.set_thumbnail(url=member.avatar_url)
-        embed.set_author(name="Smiler Pro", icon_url=self.bot.user.avatar_url)
+        embed.set_author(name="Smiler", icon_url=self.bot.user.avatar_url)
         await ctx.send(embed=embed)
 
     @command(name="warn", brief="Gives a warning to a member.")

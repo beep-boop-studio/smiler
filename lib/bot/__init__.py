@@ -76,13 +76,17 @@ class Bot(BotBase):
             self.ready = True
             self.stdout = self.get_channel(794240927950569472)
             self.scheduler.start()
+            self.update_channel = self.get_channel(795779002857554020)
 
-            await self.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.listening, name=f"s/ | watching {len(self.guilds)} servers"))
+            await self.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.listening, name=f"[s/] | Watching {len(self.guilds)} servers"))
 
             print("Bot Ready.")
+            await self.update_channel.send("Bot Ready.")
+            
 
         else:
             print("Bot Reconnected.")
+            await self.update_channel.send("Bot Reconnected.")
 
     async def on_message(self, message):
         if not message.author.bot:

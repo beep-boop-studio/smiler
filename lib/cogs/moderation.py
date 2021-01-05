@@ -1,15 +1,19 @@
 from typing import Optional
 from datetime import datetime
 import random
-import discord
 
-from better_profanity import profanity
-from discord.ext import commands
+import discord
 from discord import Member, Embed
+from discord import guild
+
 from discord.ext.commands import Cog
+from discord.ext import commands
 from discord.ext.commands import command
 
+from better_profanity import profanity
 profanity.load_censor_words_from_file("./data/profanity.txt")
+
+from ..db import db
 
 class Moderation(Cog):
     def __init__(self, bot):
@@ -30,24 +34,24 @@ class Moderation(Cog):
         await ctx.send(f"{ctx.author.mention} slapped {member.mention} {reason}! {random.choice(first)} {random.choice(second)}")
 
     @command(name="maketextchannel", aliases=["mktc"], brief="Creates a text channel.")
-    @command.has_permissions(manage_channels=True)
+    @commands.has_permissions(manage_channels=True)
     async def create_channel(self, ctx, ch_name):
         '''Creates a text channel.'''
-        await ctx.guild.create_text_channel(ch_name)
-        await ctx.send(f"#{ch_name} was successfully created, {ctx.message.author.mention}!")
+        channel = await ctx.guild.create_text_channel(ch_name)
+        await ctx.send(f"<#{channel.id}> was successfully created, {ctx.message.author.mention}!")
 
     @command(name="deltextchannel", aliases=["dtc"], brief="Deletes a text channel.")
     @commands.has_permissions(manage_channels=True)
-    async def delete_channel(self, ctx, ch_name):
+    async def delete_channel(self, ctx, channel):
         '''Deletes a text channel.'''
-        channel = discord.utils.get(ctx.guild.channels, name=ch_name)
+        channel = discord.utils.get(ctx.guild.channels, name=channel)
         
         if channel is not None:
             await channel.delete()
-            await ctx.send(f"#{ch_name} was successfully deleted, {ctx.message.author.mention}!")
+            await ctx.send(f"#{channel} was successfully deleted, {ctx.message.author.mention}!")
 
         else:
-            await ctx.send(f"No channel named {ch_name} was found, {ctx.message.author.mention}!")
+            await ctx.send(f"No channel named {channel} was found, {ctx.message.author.mention}!")
 
     @command(name="echo", aliases=["say"], brief="Echoes a message.")
     @commands.has_any_role("Developers", "Administrators", "Owners", "Shareholders", "Co-Founders")
@@ -70,8 +74,24 @@ class Moderation(Cog):
     @commands.has_permissions(manage_guild=True)
     async def give_guilds(self, ctx):
         '''Displays bot guilds.'''
-        async for guild in self.bot.fetch_guilds(limit=150):
-            await ctx.send(guild.name)
+        async for guild in self.bot.fetch_guilds(limit=200):
+            embed = Embed(title=f"{guild}",
+                            colour=self.primary_colour,
+                            datetime=datetime.utcnow())
+            await ctx.send(embed=embed)
+    
+    @command(name="bannedmembers", alises=["bm"], brief="Shows banned members.")
+    async def banned_members(self, ctx):
+        '''Shows banned members.'''
+        banned_members = await ctx.guild.bans()
+
+        for ban_entry in banned_members:
+            member = ban_entry.user
+
+            embed = Embed(title="Banned Users:",
+                            description=f"{member}",
+                            colour=self.primary_colour)
+            await ctx.send(embed=embed)
 
     @command(name="kick", brief="Kicks a member.")
     @commands.has_permissions(kick_members=True)
@@ -102,7 +122,7 @@ class Moderation(Cog):
         embed.set_author(name="Smiler Pro", icon_url=self.bot.user.avatar_url)
         await ctx.send(embed=embed)
 
-    @command(name="unban")
+    @command(name="unban", brief="Unbans a banned member")
     @commands.has_permissions(ban_members=True)
     async def unban_member(self, ctx, *, member):
         banned_users = await ctx.guild.bans()
@@ -123,11 +143,11 @@ class Moderation(Cog):
 
     @command(name="warn", brief="Gives a warning to a member.")
     @commands.has_permissions(kick_members=True, manage_nicknames=True)
-    async def warn_member(self, ctx, member : discord.Member, *, warning):
+    async def warn_member(self, ctx, member : discord.Member, *, reason):
         '''Gives a warning to a member.'''
         await ctx.message.delete()
         embed = Embed(title=f"Warning from {ctx.message.author.name}!",
-                      description=f"{warning}.",
+                      description=f"{reason}.",
                       colour=self.primary_colour)
         await member.send(embed=embed)
         await ctx.send(f"Message successfully sent to {member.mention}.", delete_after=10)

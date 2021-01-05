@@ -1,9 +1,8 @@
 
-from os import name
 from discord.ext.commands.cog import Cog
 from aiohttp import request
 from discord.ext.commands import command
-from discord import Embed, colour
+from discord import Embed
 
 class API(Cog):
     def __init__(self, bot):

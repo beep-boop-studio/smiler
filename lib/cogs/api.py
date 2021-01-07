@@ -87,24 +87,6 @@ class API(Cog):
                     embed.set_image(url=image)
                 await ctx.send(embed=embed)
 
-    @command(name="pokedex", aliases=["pd", "d"], brief="Gives information about pokemon.")
-    async def wasted_image(self, ctx, pokemon):
-        '''Gives information about pokemon.'''
-        information = f"https://pokeapi.co/api/v2/pokemon/{pokemon}"
-
-        async with request("GET", information, headers={}) as response:
-            if response.status == 200:
-                await ctx.message.delete()
-                data = await response.json()
-
-                embed = Embed(title=data["name"],
-                              colour=self.primary_colour)
-                embed.set_image(url=data["sprites"]["other"]["official-artwork"]["front_default"])
-                fields = [("Type:", data["type"], True)]
-                for name, value, inline in fields:
-                    embed.add_field(name=name, value=value, inline=inline)
-                await ctx.send(embed=embed)
-
     @Cog.listener()
     async def on_ready(self):
         print("Cog Ready: 'API'")

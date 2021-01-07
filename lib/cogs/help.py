@@ -118,7 +118,7 @@ class Help(Cog):
             await ctx.send(f"Invite Created: {invite}")
         if item == "bot":
             embed = Embed(title="Invite For Smiler",
-                                    description="https://discord.com/oauth2/authorize?client_id=786922640848977921&permissions=8&redirect_uri=https%3A%2F%2Fstudiobeepboop.com&scope=bot",
+                                    description="https://discord.com/api/oauth2/authorize?client_id=786714733981204501&permissions=8&redirect_uri=https%3A%2F%2Fwww.studiobeepboop.com%2Fbots&scope=bot",
                                     colour=self.primary_colour)
             embed.set_author(name="Smiler", icon_url=self.bot.user.avatar_url)
             embed.set_footer(text="Copyright© 2020 Beep Boop Studio. All Rights Reserved.")

@@ -22,7 +22,6 @@ class Moderation(Cog):
 
     @command(name="slap", aliases=["spank", "hit"], brief="Slaps a member.")
     @commands.has_permissions(administrator=True)
-    @commands.has_any_role("Developers", "Administrators", "Owners", "Shareholders", "Co-Founders")
     async def slap_member(self, ctx, member: Member, *, reason: Optional[str] = "something idk"):
         '''Slaps a member.'''
         first = [f"Die, {member.mention}!",
@@ -54,7 +53,7 @@ class Moderation(Cog):
             await ctx.send(f"No channel named {channel} was found, {ctx.message.author.mention}!")
 
     @command(name="echo", aliases=["say"], brief="Echoes a message.")
-    @commands.has_any_role("Developers", "Administrators", "Owners", "Shareholders", "Co-Founders")
+    @commands.has_permissions(administrator=True)
     async def say_echo(self, ctx, *, message):
         '''Echoes a message.'''
         await ctx.message.delete()
@@ -108,7 +107,7 @@ class Moderation(Cog):
         await ctx.send(embed=embed)
 
     @command(name="ban", brief="Bans a member.")
-    @commands.has_permissions(kick_members=True)
+    @commands.has_permissions(ban_members=True)
     async def ban_member(self, ctx, member : discord.Member, *, reason=None):
         '''Bans a member.'''
         await member.ban(reason=reason)

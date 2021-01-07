@@ -13,6 +13,7 @@ from ..db import db
 numbers = ("1️⃣", "2⃣", "3⃣", "4⃣", "5⃣",
 		   "6⃣", "7⃣", "8⃣", "9⃣", "🔟")
 
+
 class Reactions(Cog):
 	def __init__(self, bot):
 		self.bot = bot

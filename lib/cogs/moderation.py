@@ -172,33 +172,7 @@ class Moderation(Cog):
             stored = [w.strip() for w in f.readlines()]
         with open("./data/profanity.txt", "w", encoding="utf-8") as f:
             f.write("".join([f"{w}\n" for w in stored if w not in words]))
-
-    @command(name="modmail", aliases=["mm"], brief="Relays a message to a moderator.")
-    async def send_modmail(self, ctx, member : discord.Member, *, message):
-        await ctx.message.delete()
-        if member.guild_permissions.kick_members:
-            embed = Embed(title=f"Modmail from {ctx.message.author.display_name}!",
-                          description=f"{message}",
-                          colour=self.primary_colour,
-                          datetime=datetime.utcnow())
-            await member.send(embed=embed)
-            await ctx.send(f"{ctx.message.author.mention}, your message has successfully been relayed to {member.mention}!", delete_after=15)
-
-        else:
-            await ctx.send(f"The person you mentioned cannot recieve modmail, {ctx.message.author.mention}!")
-
-    @command(name="replymodmail", aliases=["rplmm"], brief="Reply to modmail.")
-    @commands.has_permissions(kick_members=True, manage_nicknames=True, manage_messages=True)
-    async def reply_to_modmail(self, ctx, member : discord.Member, *, message):
-        '''Reply to modmail'''
-        await ctx.message.delete()
-        embed = Embed(title=f"Reply from {ctx.message.author.display_name}.",
-                      description=f"{message}",
-                      colour=self.primary_colour,
-                      datetime=datetime.utcnow())
-        await member.send(embed=embed)
-        await ctx.send(f"{ctx.message.author.mention}, your reply has successfully been relayed to {member.mention}!", delete_after=15)
-
+            
     @Cog.listener()
     async def on_message(self, message):
         if not message.author.bot:

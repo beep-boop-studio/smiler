@@ -1,4 +1,4 @@
-# Smiler Bot  
+# Smiler Bot (DEPRECATED)
 <p align="center">
   <a href="https://www.studiobeepboop.com/smiler/">
     <img src="SmilerSilver.png" alt="Smiler Logo">
@@ -7,7 +7,9 @@
 
 ## Advanced, Fun, Colourful Discord Bot  
 **<a href="https://www.studiobeepboop.com/smiler">Smiler Bot</a> is a feature-loaded, all-purpose Discord Bot to manage and spice up your Discord Server.**  
-It provides many different features, such as auto-moderation and Pokemon, so that you don't have to worry about manual controlling your server or add more than one bot. You can even create your own commands with its 'Custom Command' feature to create even more custom events and processes.  
+It provides many different features, such as auto-moderation and Pokemon, so that you don't have to worry about manual controlling your server or add more than one bot. You can even create your own commands with its 'Custom Command' feature to create even more custom events and processes. 
+
+NOTE: This bot is no longer supported. please visit the [Gyst Homepage](https://www.studiobeepboop.com/gyst) or the [Gyst Github](https://www.github.com/beep-boop-studio/gyst).
 
 ## Free, Open-Source And Easy To Contribute To
 Smiler will remain a free product and you can contribute to it. You can help improve this incredible Discord Bot by:  
